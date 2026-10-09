@@ -2,4 +2,10 @@ framework:
   - terraform
 compact: true
 quiet: true
-skip-check: []
+skip-check:
+  - CKV_AZURE_59     # Se requiere acceso publico de red para servir el sitio web estatico hacia internet
+  - CKV2_AZURE_33    # No se usa endpoint privado ya que es una pagina web estatica de acceso libre y costo optimizado
+  - CKV2_AZURE_1     # Cifrado administrado por Microsoft es suficiente para activos estaticos sin datos sensibles
+  - CKV_AZURE_206    # LRS es suficiente para el entorno de un sitio web estatico con codigo fuente versionado en Git
+  - CKV_AZURE_33     # El servicio de Queue no se utiliza en este modulo de sitio web estatico
+  - CKV2_AZURE_40    # Terraform requiere autenticacion por clave de cuenta para cargar el blob index.html
